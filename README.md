@@ -1,6 +1,5 @@
 # Slack Project Notifier
 
-
 > A GitHub Action :rainbow:
 
 Magical slack updates for transparent GitHub project movement.
@@ -36,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Magical Slack Notifier
-        uses: elastic/testerooni@1.0
+        uses: goodroot/github-action-slack-project-notifier@1.0
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           PROJECT: ''
