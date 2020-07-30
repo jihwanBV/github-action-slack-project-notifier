@@ -53,7 +53,7 @@ async function run() {
                 "actions": [
                   {
                     "type": "button",
-                    "text": "View Project Board",
+                    "text": "View Project Issue",
                     "url": `${issueResponse.data.html_url}`
                   }
                 ]
