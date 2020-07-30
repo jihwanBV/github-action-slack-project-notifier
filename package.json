@@ -1,0 +1,26 @@
+{
+  "name": "Slack Project Notifier",
+  "version": "1.0.0",
+  "description": "A GitHub Action to notify a Slack channel with an actionable and minimal message when a card changes project columns.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goodroot/project"
+  },
+  "keywords": ["GitHub Action", "Slack", "GitHub", "Javascript"],
+  "author": "goodroot",
+  "license": "Love",
+  "bugs": {
+    "url": "https://github.com/goodroot/"
+  },
+  "homepage": "https://goodroot.ca",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "core-util-is": "^1.0.2",
+    "https": "^1.0.0"
+  }
+}

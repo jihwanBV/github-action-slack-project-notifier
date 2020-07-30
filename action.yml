@@ -1,0 +1,18 @@
+name: 'Slack Project Notifier'
+description: 'A GitHub Action to notify a Slack channel with an actionable and minimal message when a card changes project columns.'
+inputs:
+  SLACK_WEBHOOK_URL:
+    description: 'Incoming Webhook from Slack.'
+    required: true
+    default: ${{ secrets.SLACK_WEBHOOK_URL }}
+  PROJECT:
+    description: 'GitHub project id from the GitHub API. Set the action to work on only one project. Read console log to retrieve.'
+    required: false
+    default: ''
+  TOKEN:
+    description: 'Github personal access token, scoped for repository admin.'
+    required: false
+    default: ${{ secrets.TOKEN }}
+runs:
+  using: 'node12'
+  main: 'index.js'
