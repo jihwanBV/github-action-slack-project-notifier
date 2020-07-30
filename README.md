@@ -35,9 +35,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Magical Slack Notifier
-        uses: goodroot/github-action-slack-project-notifier@1.1
+        uses: goodroot/github-action-slack-project-notifier@1.2
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          PROJECT: ''
+          PROJECT: ${{ secrets.PROJECT }}
           TOKEN: ${{ secrets.TOKEN }}
 ```

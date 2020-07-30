@@ -11,11 +11,11 @@ inputs:
     description: 'Incoming Webhook from Slack.'
     required: true
   PROJECT:
-    description: 'GitHub project id from the GitHub API. Set the action to work on only one project. Read console log to retrieve.'
+    description: 'GitHub project id from the GitHub API. Set the action to work on only one project. Read console log to retrieve the value.'
     required: false
   TOKEN:
     description: 'Github personal access token, scoped for repository admin.'
-    required: false
+    required: true
 
 runs:
   using: 'node12'
