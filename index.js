@@ -17,7 +17,7 @@ async function run() {
     console.log(`Your PROJECT variable for the current project is: ${oneProject}`)
 
     if (changedColumnId) {
-      if (github.context.payload.project_card.creator.url && setProject === oneProject) {
+      if (github.context.payload.project_card.creator.url) {
 
           const issueResponse = await octokit.request(github.context.payload.project_card.creator.url)
 
