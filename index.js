@@ -3,12 +3,15 @@ const github = require('@actions/github')
 
 const https = require('https')
 
-const slackWebHookURL = core.getInput('SLACK_WEBHOOK_URL')
+const testData = require('./test_data').data
+const slackWebHookURL =  testData.slack_url || core.getInput('SLACK_WEBHOOK_URL')
 
 async function run() {
   try {
+    if(testData)
+      github.context.payload = testData.context_data
 
-    const token = core.getInput('TOKEN')
+    const token =  testData.token || core.getInput('TOKEN')
     const octokit = github.getOctokit(token);
     const changedColumnId = github.context.payload.changes && github.context.payload.changes.column_id
 
