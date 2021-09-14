@@ -12,15 +12,14 @@ async function run() {
     const octokit = github.getOctokit(token);
     const changedColumnId = github.context.payload.changes && github.context.payload.changes.column_id
 
-    console.log('payload ? ', github.context.payload)
     const oneProject = github.context.payload.project_card.project_url
 
     console.log(`Your PROJECT variable for the current project is: ${oneProject}`)
 
     if (changedColumnId) {
-      if (github.context.payload.project_card.content_url && setProject === oneProject) {
+      if (github.context.payload.project_card.creator.url && setProject === oneProject) {
 
-          const issueResponse = await octokit.request(github.context.payload.project_card.content_url)
+          const issueResponse = await octokit.request(github.context.payload.project_card.creator.url)
 
           const newStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.project_card.column_id,
