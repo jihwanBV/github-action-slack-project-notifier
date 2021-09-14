@@ -198,7 +198,7 @@ async function run() {
 
         console.log('Sending message')
         try {
-          const slackResponse = await sendSlackMessage(slackWebHookURL, userAccountNotification)
+          const slackResponse = await sendSlackMessage(slackWebHookURL, message)
           console.log('Message response', slackResponse)
         } catch (e) {
           console.error('Request error', e)
