@@ -80,7 +80,6 @@ async function project_move_message(octokit, payload) {
         cardInfoResponse.data.content_url
         // 'https://api.github.com/repos/jihwanBV/slack-event-notify-test/issues/3'
         const issueInfoResponse = await octokit.request(cardInfoResponse.data.content_url, {
-          card_id: payload.project_card.id,
           mediaType: {
             previews: [
               'inertia'
