@@ -11,9 +11,8 @@ async function run() {
     const token = core.getInput('TOKEN')
     const octokit = github.getOctokit(token);
     const changedColumnId = github.context.payload.changes && github.context.payload.changes.column_id
-    const changedProjectUrl = github.context.payload.project_card.project_url
 
-    console.log(`changed project : ${changedProjectUrl}`)
+    console.log(`changed project : ${github.context.payload.project_card.project_url}`)
 
     if (changedColumnId) {
       if (github.context.payload.project_card.creator.url) {
@@ -22,6 +21,15 @@ async function run() {
           console.log('issue response ? ', issueResponse)
           const newStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.project_card.column_id,
+            mediaType: {
+              previews: [
+                'inertia'
+              ]
+            }
+          })
+
+          cosnt projectInfo = await octokit.request('GET /projects/{project_id}', {
+            project_id: 42,
             mediaType: {
               previews: [
                 'inertia'
@@ -52,7 +60,7 @@ async function run() {
                   {
                     "type": "button",
                     "text": "View Project Issue",
-                    "url": `${changedProjectUrl}`
+                    "url": `${projectInfo.html_url}`
                   }
                 ]
               }
