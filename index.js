@@ -11,10 +11,9 @@ async function run() {
     const token = core.getInput('TOKEN')
     const octokit = github.getOctokit(token);
     const changedColumnId = github.context.payload.changes && github.context.payload.changes.column_id
+    const changedProjectUrl = github.context.payload.project_card.project_url
 
-    const oneProject = github.context.payload.project_card.project_url
-
-    console.log(`Your PROJECT variable for the current project is: ${oneProject}`)
+    console.log(`changed project : ${changedProjectUrl}`)
 
     if (changedColumnId) {
       if (github.context.payload.project_card.creator.url) {
@@ -53,7 +52,7 @@ async function run() {
                   {
                     "type": "button",
                     "text": "View Project Issue",
-                    "url": `${issueResponse.data.html_url}`
+                    "url": `${changedProjectUrl}`
                   }
                 ]
               }
