@@ -17,7 +17,6 @@ async function run() {
     if (changedColumnId) {
       if (github.context.payload.project_card.creator.url) {
 
-          const issueResponse = await octokit.request(github.context.payload.project_card.creator.url)
           const fromStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.changes.column_id.from,
             mediaType: {
@@ -26,7 +25,6 @@ async function run() {
               ]
             }
           })
-          console.log('fromStatus response ? ', fromStatus)
 
           const newStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.project_card.column_id,
@@ -36,19 +34,16 @@ async function run() {
               ]
             }
           })
-          console.log('fromStatus response ? ', fromStatus)
 
-          const projectInfo = await octokit.request('GET /projects/{project_id}', {
-            project_id: github.context.payload.project_card.project_url.split('/').reverse().shift(),
+          const projectInfo = await octokit.request(github.context.payload.project_card.project_url, {
             mediaType: {
               previews: [
                 'inertia'
               ]
             }
           })
-          console.log('projectInfo response ? ', projectInfo)
 
-          const cardInfo = await octokit.request('GET /projects/columns/cards/{card_id}', {
+          const cardInfoResponse = await octokit.request('GET /projects/columns/cards/{card_id}', {
             card_id: github.context.payload.project_card.id,
             mediaType: {
               previews: [
@@ -57,7 +52,25 @@ async function run() {
             }
           })
 
-          console.log('card info ? ', cardInfo)
+          let cardInfo = undefined
+
+          if(!cardInfoResponse.data.content_url){
+            cardInfo = cardInfoResponse.data
+            cardInfo['type'] = 'note'
+          }else{
+            cardInfoResponse.data.content_url
+            // 'https://api.github.com/repos/jihwanBV/slack-event-notify-test/issues/3'
+            const issueInfoResponse = await octokit.request(cardInfoResponse.data.content_url, {
+              card_id: github.context.payload.project_card.id,
+              mediaType: {
+                previews: [
+                  'inertia'
+                ]
+              }
+            })
+            cardInfo = issueInfoResponse.data
+            cardInfo['type'] = 'issue'
+          }
 
           const userAccountNotification =  {
             "username": "Projector",
@@ -70,6 +83,11 @@ async function run() {
                   {
                     "title": "Project Name",
                     "value": issueResponse.data.title,
+                    "short": true
+                  },
+                  {
+                    "title": `Card Name [${cardInfo.type}]`,
+                    "value": cardInfo.note ?? cardInfo.title,
                     "short": true
                   },
                   {
