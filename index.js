@@ -28,7 +28,7 @@ async function run() {
             }
           })
 
-          cosnt projectInfo = await octokit.request('GET /projects/{project_id}', {
+          const projectInfo = await octokit.request('GET /projects/{project_id}', {
             project_id: 42,
             mediaType: {
               previews: [
