@@ -82,7 +82,7 @@ async function run() {
                 "fields": [
                   {
                     "title": "Project Name",
-                    "value": issueResponse.data.title,
+                    "value": projectInfo.data.name,
                     "short": true
                   },
                   {
