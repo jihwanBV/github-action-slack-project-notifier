@@ -36,6 +36,7 @@ async function run() {
               ]
             }
           })
+          console.log('fromStatus response ? ', fromStatus)
 
           const projectInfo = await octokit.request('GET /projects/{project_id}', {
             project_id: github.context.payload.project_card.project_url.split('/').reverse().shift(),
@@ -45,7 +46,7 @@ async function run() {
               ]
             }
           })
-          console.log('projectInfo response ? ', fromStatus)
+          console.log('projectInfo response ? ', projectInfo)
 
           const userAccountNotification =  {
             "username": "Projector",
