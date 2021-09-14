@@ -48,6 +48,17 @@ async function run() {
           })
           console.log('projectInfo response ? ', projectInfo)
 
+          const cardInfo = await octokit.request('GET /projects/columns/cards/{card_id}', {
+            project_id: github.context.payload.project_card.id,
+            mediaType: {
+              previews: [
+                'inertia'
+              ]
+            }
+          })
+
+          console.log('card info ? ', cardInfo)
+
           const userAccountNotification =  {
             "username": "Projector",
             "text": "Heya! Project status updated.",
