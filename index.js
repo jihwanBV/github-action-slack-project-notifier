@@ -84,13 +84,13 @@ async function run() {
                 "color": "#2eb886",
                 "fields": [
                   {
-                    "title": "Project Name",
-                    "value": projectInfo.data.name,
+                    "title": `${projectInfo.data.name} - [${cardInfo.type}]`,
+                    "value": cardInfo.type == 'note' ? cardInfo.note : cardInfo.title,
                     "short": true
                   },
                   {
-                    "title": `Card Name [${cardInfo.type}]`,
-                    "value": cardInfo.type == 'note' ? cardInfo.note : cardInfo.title,
+                    "title": ``,
+                    "value": "",
                     "short": true
                   },
                   {
