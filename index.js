@@ -3,8 +3,31 @@ const github = require('@actions/github')
 
 const https = require('https')
 
-const testData = require('./test_data').data
+const testData = get_test_data()
 const slackWebHookURL = testData.slack_url || core.getInput('SLACK_WEBHOOK_URL')
+
+function get_test_data() {
+  const fs = require('fs')
+  const fileName = 'test_data2'
+  const path = `./${fileName}.js`
+
+  try {
+    if (fs.existsSync(path)) {
+      //file exists
+      return require(`./${fileName}`).data
+    }else{
+      return {
+      }  
+    }
+  } catch (err) {
+    // console.error(err)
+    return {
+      'slack_url' : undefined,
+      'token': undefined,
+      'context_data': undefined
+    }
+  }
+}
 
 async function project_move_message(octokit, payload) {
   const changedColumnId = payload.changes && payload.changes.column_id
@@ -157,14 +180,14 @@ function sendSlackMessage(webhookURL, messageBody) {
 
 async function run() {
   try {
-    if (testData)
+    if (testData.context_data)
       github.context.payload = testData.context_data
 
     const token = testData.token || core.getInput('TOKEN')
     const octokit = github.getOctokit(token);
     let message = undefined;
     if (github.context.payload.action == 'moved') {
-      await project_move_message(octokit, github.context.payload)
+      message = await project_move_message(octokit, github.context.payload)
     }
 
     if (message)
