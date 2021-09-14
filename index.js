@@ -87,7 +87,7 @@ async function run() {
                   },
                   {
                     "title": `Card Name [${cardInfo.type}]`,
-                    "value": cardInfo.note ?? cardInfo.title,
+                    "value": cardInfo.type == 'note' ? cardInfo.note : cardInfo.title,
                     "short": true
                   },
                   {
