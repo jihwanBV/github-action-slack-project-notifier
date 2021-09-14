@@ -12,7 +12,7 @@ async function run() {
     const octokit = github.getOctokit(token);
     const changedColumnId = github.context.payload.changes && github.context.payload.changes.column_id
 
-    const setProject = core.getInput('PROJECT')
+    console.log('payload ? ', github.context.payload)
     const oneProject = github.context.payload.project_card.project_url
 
     console.log(`Your PROJECT variable for the current project is: ${oneProject}`)
