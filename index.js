@@ -71,7 +71,7 @@ async function run() {
                   {
                     "type": "button",
                     "text": "View Project Issue",
-                    "url": `${projectInfo.html_url}`
+                    "url": `${projectInfo.data.html_url}`
                   }
                 ]
               }
