@@ -20,7 +20,7 @@ async function run() {
       if (github.context.payload.project_card.creator.url) {
 
           const issueResponse = await octokit.request(github.context.payload.project_card.creator.url)
-
+          console.log('issue response ? ', issueResponse)
           const newStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.project_card.column_id,
             mediaType: {
