@@ -18,7 +18,16 @@ async function run() {
       if (github.context.payload.project_card.creator.url) {
 
           const issueResponse = await octokit.request(github.context.payload.project_card.creator.url)
-          console.log('issue response ? ', issueResponse)
+          const fromStatus = await octokit.request('GET /projects/columns/{column_id}', {
+            column_id: github.context.payload.changes.column_id.from,
+            mediaType: {
+              previews: [
+                'inertia'
+              ]
+            }
+          })
+          console.log('fromStatus response ? ', fromStatus)
+
           const newStatus = await octokit.request('GET /projects/columns/{column_id}', {
             column_id: github.context.payload.project_card.column_id,
             mediaType: {
@@ -36,6 +45,7 @@ async function run() {
               ]
             }
           })
+          console.log('projectInfo response ? ', fromStatus)
 
           const userAccountNotification =  {
             "username": "Projector",
