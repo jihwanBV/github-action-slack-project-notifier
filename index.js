@@ -74,7 +74,7 @@ async function run() {
 
           const userAccountNotification =  {
             "username": "Projector",
-            "text": "Heya! Project status updated.",
+            "text": "Heya! Project Card status updated.",
             "icon_emoji": ":rainbloblurk:",
             "attachments": [
               {
