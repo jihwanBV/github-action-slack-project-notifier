@@ -62,7 +62,12 @@ async function run() {
                     "short": true
                   },
                   {
-                    "title": "New Status",
+                    "title": "From Status",
+                    "value": fromStatus.data.name,
+                    "short": true
+                  },
+                  {
+                    "title": "To Status",
                     "value": newStatus.data.name,
                     "short": true
                   }
